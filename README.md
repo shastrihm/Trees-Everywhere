@@ -22,9 +22,10 @@ Deconstructs the tree by recursively traversing the tree and deleting each node.
 
 >std::string path_to(tree_ptr_t tree, key_t key);
 
-Returns a string path (e.g. "LRLRLL") to the leftmost node containing the key specified. It uses a private
-function called "string_path" that recursively traverses the tree by calling itself on the right and subtrees.
-If and once such a node is found, the tree iterates through all the left children of that node and places an 'M' in the
+Returns a string path (e.g. "LRLRLL") to the leftmost node containing the key specified. It first 
+uses a private function 'is_key_in_tree' to check if such a node even exists. If it returns true, then a 
+function called "string_path" recursively traverses the tree by calling itself on the right and subtrees.
+Once such a node is found, the tree iterates through all the left children of that node and places an 'M' in the
 spot wherever another node with the same key is found. Then the string path is cleaned up to return the path[:m] where 
 m is the index of the final occurence of 'M', and is then sanitized of all other occurences of 'M'. 
 
