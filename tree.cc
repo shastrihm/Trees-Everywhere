@@ -1,7 +1,6 @@
 //Name: Hrishee Shastri
 
 #include "tree.hh"
-#include <vector>
 using namespace std;
 
 // initializes a tree
@@ -65,6 +64,31 @@ string clean_path_string(string path)
     return new_split_path;
 }
 
+
+// recursively checks tree to see if key in tree.
+bool is_key_in_tree(tree_ptr_t tree, key_t key)
+{
+    if(!tree)
+    {
+        return false;
+    }
+
+    if(tree->key_ == key)
+    {
+        return true;
+    }
+
+    bool left = is_key_in_tree(tree->left_, key);
+    bool right = is_key_in_tree(tree->right_, key);
+
+    if(left or right)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 // helper function for path_to. Recurses over right and left branches and records path.
 string string_path(tree_ptr_t tree, key_t key, string path)
 {   
@@ -108,17 +132,16 @@ string string_path(tree_ptr_t tree, key_t key, string path)
     return left; 
 }
 
-// returns string of path of node with key
+// returns string of path to node with key
 string path_to(tree_ptr_t tree, key_t key)
 {
-    string path = string_path(tree, key, "");
-    
-    if(path=="absent")
+    if(!is_key_in_tree(tree,key))
     {
         cout << "No such key found." << "\n";
-        exit(0);
+        assert(false);
     }
-    return path;
+
+    return string_path(tree, key, "");
 }
 
 // returns node at end of path
