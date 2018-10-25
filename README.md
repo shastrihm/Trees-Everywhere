@@ -2,10 +2,7 @@
 A simple tree data structure with traversal algorithms in C++
 
 # How to build
->g++-7 -Wall -Wextra -pedantic -Werror -std=c++17   -c -o test_tree.o test_tree.cc
-
-or, just use the Makefile.
-
+Just use the Makefile.
 >make
 
 # Design choices
